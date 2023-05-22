@@ -12,10 +12,11 @@ public class UserRegistrationMain {
         String fName = null;
         String lName = null;
         String emailAddress =null;
+        String password =null;
 
         int temp = -1;
         while(temp != 0) {
-            System.out.println("1.FirstName 2.LastName 3. Email 7.Exit");
+            System.out.println("1.FirstName 2.LastName 3. Email 4.Password 5.Exit");
             System.out.print("Enter the option:");
             int choice = sc.nextInt();
 
@@ -61,7 +62,21 @@ public class UserRegistrationMain {
 
                     }
                     break;
-                case 7:
+
+                case  4:
+                    boolean flagPassword = false;
+                    while (flagPassword != true) {
+                        System.out.print("Enter password:");
+                        password = sc.next();
+                        if (passwordValidation(password)) {
+                            flagPassword = true;
+                            System.out.println("password valid");
+                        } else {
+                            System.out.println("!password not valid!");
+                        }
+                    }
+                    break;
+                case 5:
                     temp = 0;
                     break;
                 default:
@@ -86,6 +101,11 @@ public class UserRegistrationMain {
         Matcher matcher = pattern.matcher(value);
         return (matcher.matches());
 
+    }
+    public static boolean passwordValidation(String value){
+        Pattern pattern = Pattern.compile("^(?=[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[%^_#&$+=@]).{8,16}$");
+        Matcher matcher = pattern.matcher(value);
+        return (matcher.matches());
     }
 
     public static void main(String[] args) {
