@@ -9,11 +9,13 @@ public class UserRegistrationMain {
 
     public static void userDataValidation(){
         Scanner sc = new Scanner(System.in);
-        String fName = null, lName = null;
+        String fName = null;
+        String lName = null;
+        String emailAddress =null;
 
         int temp = -1;
         while(temp != 0) {
-            System.out.println("1.FirstName 2.LastName 7.Exit");
+            System.out.println("1.FirstName 2.LastName 3. Email 7.Exit");
             System.out.print("Enter the option:");
             int choice = sc.nextInt();
 
@@ -43,12 +45,27 @@ public class UserRegistrationMain {
                             System.out.println("!last name not valid!");
                         }
                     }
+
+                    break;
+                case 3:
+                    boolean flagEmail = false;
+                    while (flagEmail!= true){
+                        System.out.println("Enter Email Address:");
+                        emailAddress =sc.next();
+                        if (emailAddressValidation(emailAddress)){
+                            flagEmail = true;
+                            System.out.println("Emial is valid");
+                        }else {
+                            System.out.println("Email is not valid");
+                        }
+
+                    }
                     break;
                 case 7:
                     temp = 0;
                     break;
                 default:
-                    System.out.println("!!! Enter valid option !!!");
+                    System.out.println(" Please Enter valid option");
                     break;
             }
         }
@@ -64,9 +81,17 @@ public class UserRegistrationMain {
         Matcher matcher = pattern.matcher(value);
         return (matcher.matches());
     }
+    public static boolean emailAddressValidation(String value){
+        Pattern pattern = Pattern.compile("^[A-Z]{1,1}[a-z]{2,}$");
+        Matcher matcher = pattern.matcher(value);
+        return (matcher.matches());
+
+    }
 
     public static void main(String[] args) {
         System.out.println("USER REGISTRATION WITH REGEX");
         userDataValidation();
+
     }
+
 }
